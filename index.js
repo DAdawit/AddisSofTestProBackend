@@ -27,11 +27,6 @@ app.use(function (req, res, next) {
 
 app.use(express.static("assets"));
 
-// or
-// require("../models/Song");
-// const url =
-//   "mongodb+srv://Dadawit:<Dadawit0659>@musicplay.qjfbxhz.mongodb.net/?retryWrites=true&w=majority";
-
 mongoose
   .connect(process.env.MONGODB_API_KEY, {
     useNewUrlParser: true,
@@ -43,14 +38,17 @@ mongoose
 // mongoose.connect("mongodb://localhost/ninjago");
 // mongoose.Promise = global.Promise;
 
-// module.exports.handler = serverless(app);
-// set routes
-app.use("/api", require("./routes/api"));
+// set routes for local
+// app.use("/api", require("./routes/api"));
 
-app.use(function (err, req, res, next) {
-  res.status(422).send({ error: err.message });
-});
+// set routes for netlify
+app.use("/.netlify/functions/api", require("../../routes/api"));
+module.exports.handler = serverless(app);
 
-app.listen(process.env.port || 4000, function () {
-  console.log("now listning for request");
-});
+// app.use(function (err, req, res, next) {
+//   res.status(422).send({ error: err.message });
+// });
+
+// app.listen(process.env.port || 4000, function () {
+//   console.log("now listning for request");
+// });
