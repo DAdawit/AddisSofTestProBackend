@@ -5,9 +5,9 @@ const SongSchema = mongoose.Schema({
     type: String,
     require: true,
   },
-  artist: {
+  message: {
     type: String,
-    require: true,
+    default: null,
   },
   songUrl: {
     type: String,

@@ -45,7 +45,11 @@ const SongController = require("../controller/SongsController");
 //     })
 //     .catch(next);
 // });
-
+router.get("/", (req, res) => {
+  res.send({
+    status: "success",
+  });
+});
 router.post("/signup", authController.singup_post);
 router.post("/login", authController.login_post);
 router.post("/verifyToken", authController.verifyToken);

@@ -23,7 +23,7 @@ module.exports.store = (req, res) => {
     } else {
       const newSong = new Song({
         title: req.body.title,
-        artist: req.body.artist,
+        message: req.body.message,
         songUrl: songUrl,
       });
       newSong
@@ -56,7 +56,7 @@ module.exports.destroy = async (req, res) => {
   try {
     const song = await Song.findByIdAndRemove({ _id: req.params.id });
     const path = "assets/" + song.songUrl;
-    console.log("songpath", path);
+    // console.log("songpath", path);
     deletOldfile(path);
     res.status(200).send(song);
   } catch (error) {
